@@ -1,11 +1,13 @@
 package com.bti.inventory.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
 public class SiteDto {
 
+	private Long id;
 	@NotEmpty
 	private String siteID;
 	
@@ -22,6 +24,60 @@ public class SiteDto {
 	private String scheduledSalesTaxID;
 	private String scheduledPurchaseTaxID;
 	private Date creationDate;
+	private Date modifiedDate;
+	private String changedBy;
+	private Date dexRowTS;
+	private Integer dexRowID;
+	private List<BinDto> bins;
+
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<BinDto> getBins() {
+		return bins;
+	}
+
+	public void setBins(List<BinDto> bins) {
+		this.bins = bins;
+	}
+	public Date getDexRowTS() {
+		return dexRowTS;
+	}
+
+	public void setDexRowTS(Date dexRowTS) {
+		this.dexRowTS = dexRowTS;
+	}
+
+	public Integer getDexRowID() {
+		return dexRowID;
+	}
+
+	public void setDexRowID(Integer dexRowID) {
+		this.dexRowID = dexRowID;
+	}
+
+	public String getChangedBy() {
+		return changedBy;
+	}
+
+	public void setChangedBy(String changedBy) {
+		this.changedBy = changedBy;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+	
 
 	public String getSiteID() {
 		return siteID;

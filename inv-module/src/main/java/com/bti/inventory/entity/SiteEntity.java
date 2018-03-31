@@ -1,26 +1,38 @@
 package com.bti.inventory.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "IV40200")
 public class SiteEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LOCNCODIND")
 	private Long id;
 
-	@Column(name = "LOCNCODCODE")
+	@Column(name = "LOCNCODCODE", unique = true)
 	private String siteID;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "siteEntity")
+	//@MapKeyJoinColumn(name="id")
+	private List<BinEntity> bins = new ArrayList<>();
+	
 	@Column(name = "LOCDSCR")
 	private String description;
 
@@ -55,19 +67,30 @@ public class SiteEntity {
 	private String scheduledPurchaseTaxID;
 
 	@Column(name = "CREATDDT")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 
 	@Column(name = "MODIFDT")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date modificationDate;
 
 	@Column(name = "CHANGEBY")
 	private String changedBy;
 
 	@Column(name = "DEX_ROW_TS")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dexRowTS;
 
 	@Column(name = "DEX_ROW_ID")
 	private Integer dexRowID;
+
+	public List<BinEntity> getBins() {
+		return bins;
+	}
+
+	public void setBins(List<BinEntity> bins) {
+		this.bins = bins;
+	}
 
 	public String getSiteID() {
 		return siteID;

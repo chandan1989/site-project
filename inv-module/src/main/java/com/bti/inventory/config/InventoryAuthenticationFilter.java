@@ -16,12 +16,12 @@ import com.bti.inventory.dto.UserSessionDto;
 import com.bti.inventory.rest.UserServiceClient;
 
 @Component
-public class InventoryAuthenticationFilter extends OncePerRequestFilter {
+public class InventoryAuthenticationFilter {//extends OncePerRequestFilter {
 
 	@Autowired
 	private UserServiceClient client;
 
-	@Override
+	//@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String URI = request.getRequestURI();
