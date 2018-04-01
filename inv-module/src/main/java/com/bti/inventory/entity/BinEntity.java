@@ -18,21 +18,48 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "IV40201")
 public class BinEntity {
-
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LOCNCODIND")
+	
+	/*@Column(name = "LOCNCODIND")
 	private Long id;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	@Column(name = "LOCNCODE", unique = true)
+	private String siteID;
 
+	
+	public String getSiteID() {
+		return siteID;
+	}
+	public void setSiteID(String siteID) {
+		this.siteID = siteID;
+	}*/
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LOCNCODCODE")
-	private String siteID;*/
+	@JoinColumn(name = "LOCNCODIND", nullable = false)
+	/*@JoinColumns({ @JoinColumn(name = "LOCNCODIND", referencedColumnName = "id"),
+		@JoinColumn(name = "LOCNCODE", referencedColumnName = "siteID") })*/
+	private SiteEntity siteEntity;
+	
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LOCNCODE", nullable = false)
-	@JoinColumns({ @JoinColumn(name = "LOCNCODIND", referencedColumnName = "id"),
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "siteEntity_id", nullable = false)
+	//@JoinColumn(name = "LOCNCODIND", nullable = false)
+	/*@JoinColumns({ @JoinColumn(name = "LOCNCODIND", referencedColumnName = "id"),
 			@JoinColumn(name = "LOCNCODCODE", referencedColumnName = "siteID") })
 	private SiteEntity siteEntity;
+*/
+	public SiteEntity getSiteEntity() {
+		return siteEntity;
+	}
 
+	public void setSiteEntity(SiteEntity siteEntity) {
+		this.siteEntity = siteEntity;
+	}
+	
 	@Column(name = "LOCBIN")
 	private String binName;
 
@@ -43,7 +70,7 @@ public class BinEntity {
 	private String fax;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LOCNBINSEQ")
 	private Integer locBinSeq;
 
@@ -64,30 +91,6 @@ public class BinEntity {
 
 	@Column(name = "DEX_ROW_ID")
 	private Integer dexRowID;
-
-	/*public String getSiteID() {
-		return siteID;
-	}
-
-	public void setSiteID(String siteID) {
-		this.siteID = siteID;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}*/
-
-	public SiteEntity getSiteEntity() {
-		return siteEntity;
-	}
-
-	public void setSiteEntity(SiteEntity siteEntity) {
-		this.siteEntity = siteEntity;
-	}
 
 	public String getBinName() {
 		return binName;
@@ -161,4 +164,5 @@ public class BinEntity {
 		this.dexRowID = dexRowID;
 	}
 
+	
 }

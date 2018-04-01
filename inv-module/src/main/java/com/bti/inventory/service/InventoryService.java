@@ -2,7 +2,10 @@ package com.bti.inventory.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -34,6 +37,13 @@ public class InventoryService {
 		}
 		*/
 		SiteEntity siteEntity = convertToEntity(siteDto);
+		Set<BinEntity> binEntities = new HashSet();
+		binEntities = siteEntity.getBins();
+		if(binEntities!=null){
+			for(BinEntity binEntity : binEntities){
+				binEntity.setSiteEntity(siteEntity);
+			}
+		}
 		
 		/*List<BinEntity> binEntities = new ArrayList();
 		if(binDtos!=null){
@@ -58,6 +68,11 @@ public class InventoryService {
 		}
 		return siteDtos;
 	}
+	public SiteDto getSiteById(Long id) {
+		SiteEntity siteEntity =  inventoryRepository.findById(id).get();
+		SiteDto siteDto = convertToDto(siteEntity);
+		return siteDto;
+	}
 	public List<BinDto> getAllBins() {
 		
 		return null;
@@ -66,6 +81,13 @@ public class InventoryService {
 		siteDto.setModifiedDate(new Date());
 		siteDto.setChangedBy("DUMMY-test");
 		SiteEntity siteEntity = convertToEntity(siteDto);
+		Set<BinEntity> binEntities = new HashSet();
+		binEntities = siteEntity.getBins();
+		if(binEntities!=null){
+			for(BinEntity binEntity : binEntities){
+				binEntity.setSiteEntity(siteEntity);
+			}
+		}
 		inventoryRepository.save(siteEntity);
 	}
 	public void deleteSite(Long siteId){

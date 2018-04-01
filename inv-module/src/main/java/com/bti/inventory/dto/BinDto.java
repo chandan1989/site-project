@@ -1,6 +1,26 @@
 package com.bti.inventory.dto;
 
 public class BinDto {
+	
+	private Long id ;
+	private String siteID;
+	
+
+	public String getSiteID() {
+		return siteID;
+	}
+
+	public void setSiteID(String siteID) {
+		this.siteID = siteID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	private String binName;
 

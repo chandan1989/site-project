@@ -1,8 +1,8 @@
 package com.bti.inventory.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,13 +25,35 @@ public class SiteEntity {
 	@Column(name = "LOCNCODIND")
 	private Long id;
 
-	@Column(name = "LOCNCODCODE", unique = true)
+	@Column(name = "LOCNCODE", unique = true)
 	private String siteID;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSiteID() {
+		return siteID;
+	}
+
+	public void setSiteID(String siteID) {
+		this.siteID = siteID;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "siteEntity")
-	//@MapKeyJoinColumn(name="id")
-	private List<BinEntity> bins = new ArrayList<>();
-	
+	private Set<BinEntity> bins = new HashSet<BinEntity>(0);
+
+	public Set<BinEntity> getBins() {
+		return bins;
+	}
+
+	public void setBins(Set<BinEntity> bins) {
+		this.bins = bins;
+	}
 	@Column(name = "LOCDSCR")
 	private String description;
 
@@ -83,22 +104,6 @@ public class SiteEntity {
 
 	@Column(name = "DEX_ROW_ID")
 	private Integer dexRowID;
-
-	public List<BinEntity> getBins() {
-		return bins;
-	}
-
-	public void setBins(List<BinEntity> bins) {
-		this.bins = bins;
-	}
-
-	public String getSiteID() {
-		return siteID;
-	}
-
-	public void setSiteID(String siteID) {
-		this.siteID = siteID;
-	}
 
 	public String getDescription() {
 		return description;
@@ -194,14 +199,6 @@ public class SiteEntity {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Date getModificationDate() {
