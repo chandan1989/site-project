@@ -32,10 +32,6 @@ public class InventoryService {
 	 */
 	public void createSite( SiteDto siteDto) {
 		List<BinDto> binDtos = new ArrayList();
-		/*if(siteDto!=null){
-			binDtos = siteDto.getBins();
-		}
-		*/
 		SiteEntity siteEntity = convertToEntity(siteDto);
 		Set<BinEntity> binEntities = new HashSet();
 		binEntities = siteEntity.getBins();
@@ -44,15 +40,6 @@ public class InventoryService {
 				binEntity.setSiteEntity(siteEntity);
 			}
 		}
-		
-		/*List<BinEntity> binEntities = new ArrayList();
-		if(binDtos!=null){
-			for(BinDto binDto : binDtos){
-				binEntities.add(convertToEntity(binDto));
-			}
-			siteEntity.setBins(binEntities);
-		}*/
-		
 		inventoryRepository.save(siteEntity);
 	}
 	
@@ -65,7 +52,10 @@ public class InventoryService {
 				SiteDto siteDto = convertToDto(siteEntity);
 				siteDtos.add(siteDto);
 			}
+			
+			
 		}
+		
 		return siteDtos;
 	}
 	public SiteDto getSiteById(Long id) {
@@ -114,5 +104,6 @@ public class InventoryService {
 		SiteDto dto = mapper.map(siteEntity, SiteDto.class);
 		return dto;
 	}
+
 
 }

@@ -44,7 +44,7 @@ public class SiteEntity {
 		this.siteID = siteID;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "siteEntity")
+	@OneToMany(cascade = {CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE}, fetch = FetchType.LAZY, mappedBy = "siteEntity")
 	private Set<BinEntity> bins = new HashSet<BinEntity>(0);
 
 	public Set<BinEntity> getBins() {

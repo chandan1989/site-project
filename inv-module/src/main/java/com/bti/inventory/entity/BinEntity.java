@@ -26,17 +26,16 @@ public class BinEntity {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}*/
 	@Column(name = "LOCNCODE", unique = true)
 	private String siteID;
-
 	
 	public String getSiteID() {
 		return siteID;
 	}
 	public void setSiteID(String siteID) {
 		this.siteID = siteID;
-	}*/
+	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LOCNCODIND", nullable = false)
@@ -70,7 +69,7 @@ public class BinEntity {
 	private String fax;
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "LOCNBINSEQ")
 	private Integer locBinSeq;
 
